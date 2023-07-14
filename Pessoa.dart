@@ -25,6 +25,16 @@ class Pessoa {
   }
 
   String toString(){
-    return '$nome | ${peso.toStringAsFixed(1)} kg | ${altura.toStringAsFixed(1)} m | ${imc.toStringAsFixed(1)}';
+    return '$nome | ${peso.toStringAsFixed(2)} kg | ${altura.toStringAsFixed(2)} m | ${imc.toStringAsFixed(2)}';
   }
+
+  @override
+  bool operator == (Object other) =>
+    identical(this, other) ||
+    other is Pessoa &&
+    runtimeType == other.runtimeType &&
+    nome == other.nome;
+
+  @override
+  int get hashCode => nome.hashCode;
 }

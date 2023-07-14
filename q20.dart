@@ -19,14 +19,15 @@ write_bin(filePath, content) {
 
   for (var data in content) {
     data.nome += '\0';
+    //print(data.nome);
     var nomeBytes = data.nome.codeUnits;
-    var alturaBytes = Uint8List(8)..buffer.asByteData().setFloat64(0, data.altura, Endian.little);
     var pesoBytes = Uint8List(8)..buffer.asByteData().setFloat64(0, data.peso, Endian.little);
+    var alturaBytes = Uint8List(8)..buffer.asByteData().setFloat64(0, data.altura, Endian.little);
     var imcBytes = Uint8List(8)..buffer.asByteData().setFloat64(0, data.imc, Endian.little);
     
     randomAccessFile.writeFromSync(Uint8List.fromList(nomeBytes));
-    randomAccessFile.writeFromSync(alturaBytes);
     randomAccessFile.writeFromSync(pesoBytes);
+    randomAccessFile.writeFromSync(alturaBytes);
     randomAccessFile.writeFromSync(imcBytes);
   }
 
@@ -52,7 +53,8 @@ read_bin (filePath) {
         if(aux == '\0')
           break;
         nome += aux;
-        print(nome);
+        //print(aux);
+        //stdin.readLineSync();
       }
 
       var alturaBytes = randomAccessFile.readSync(8);
